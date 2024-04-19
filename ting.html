@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Falling Object Speed</title>
+</head>
+<body>
+  <h1>Speed of a Falling Object on Planets</h1>
+  <select id="celestial-object-selector">
+    <option value="earth">Earth</option>
+    <option value="jupiter">Jupiter</option>
+    <option value="mars">Mars</option>
+    <option value="mercury">Mercury</option>
+    <option value="neptune">Neptune</option>
+    <option value="saturn">Saturn</option>
+    <option value="venus">Venus</option>
+    <option value="uranus">Uranus</option>
+
+    <!-- planets  -->
+  </select>
+  <p id="speed-display" align="center">Speed: </p>
+  <p id="time-display" align="center">Time: </p>
+  
+  <style> 
+    p { 
+        font-size: 50px; 
+        font-family: Arial
+    } 
+    h1 {
+        font-family: Georgia;
+    }
+</style> 
+  <script>
+    // Constants (acceleration due to gravity on different celestial objects)
+    const gravity = {
+        earth: 9.8,
+      jupiter: 24.79,
+      mars: 3.71,
+      mercury: 3.7,
+      neptune: 11.15,
+      saturn: 11.19,
+      venus: 8.87,
+      uranus: 8.87
+    };
+    
+    // Variables
+    let time = 0; // Time in seconds
+    let speed = 0; // Initial speed in m/s
+    
+    // Function to calculate speed at a given time
+    function calculateSpeed() {
+      const selectedObject = document.getElementById("celestial-object-selector").value;
+      speed = gravity[selectedObject] * time; // Assuming no air resistance
+    }
+    
+    // Function to update the speed display
+    function updateSpeedDisplay() {
+      const speedDisplay = document.getElementById("speed-display");
+      speedDisplay.textContent = "Speed: " + speed.toFixed(2) + " m/s";
+    }
+    
+    // Function to update the time display
+    function updateTimeDisplay() {
+      const timeDisplay = document.getElementById("time-display");
+      timeDisplay.textContent = "Time: " + time.toFixed(2) + " s";
+    }
+    
+    // Function to update the speed and time over intervals
+    function updateSpeedAndTime() {
+      calculateSpeed();
+      updateSpeedDisplay();
+      updateTimeDisplay();
+      time += 0.1; // Time interval in seconds
+    }
+    
+    // Interval for updating speed and time
+    setInterval(updateSpeedAndTime, 100); // Update every 0.1 seconds
+    
+    // Initial display update
+    updateSpeedDisplay();
+    updateTimeDisplay();
+  </script>
+</body>
+</html>
